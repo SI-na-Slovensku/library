@@ -1,8 +1,6 @@
 {
     "extends": "standard",
-    "plugins": [
-        "standard"
-    ],
+    "plugins": [],
     "parserOptions": {
       "ecmaVersion": 2019
     },
