@@ -1,0 +1,49 @@
+<div class="tree-container">
+    <ul class="tree-list">
+      <% tree.forEach((firstLvlItem) => { %>
+        <% const type = firstLvlItem.resourceType %>
+<!--        <li class="type-<%= type %>">-->
+        <li class="tree-list-item">
+          <a class="tree-link" href="<%- firstLvlItem.url %>"><%= firstLvlItem.name %></a>
+<!--          <button class="accordion">v</button>-->
+        <% if (firstLvlItem.children && firstLvlItem.children.length) { %>
+          <div class="pannel">
+              <ul class="tree-list tree-list-nested">
+                <% firstLvlItem.children.forEach((secondLvlItem) => { %>
+                  <li>
+                    <a class="tree-link" href="<%- secondLvlItem.url %>"><%= secondLvlItem.name %></a>
+                    <% if (secondLvlItem.children && secondLvlItem.children.length) { %>
+                      <ul class="tree-list tree-list-nested">
+                        <% secondLvlItem.children.forEach((thirdLvlItem) => { %>
+                          <li>
+                            <a class="tree-link" href="<%- thirdLvlItem.url %>"><%= thirdLvlItem.name %></a>
+                          </li>
+                        <% }) %>
+                      </ul>
+                    <% } %>
+                  </li>
+                <% }) %>
+              </ul>
+          </div>
+        <% } %>
+        </li>
+      <% }) %>
+    </ul>
+
+    <script>
+      // const acc = document.getElementsByClassName("accordion");
+      // let i;
+      //
+      // for (i = 0; i < acc.length; i++) {
+      //   acc[i].addEventListener("click", function() {
+      //     this.classList.toggle("active");
+      //     var panel = this.nextElementSibling;
+      //     if (panel.style.display === "block") {
+      //       panel.style.display = "none";
+      //     } else {
+      //       panel.style.display = "block";
+      //     }
+      //   });
+      // }
+    </script>
+</div>

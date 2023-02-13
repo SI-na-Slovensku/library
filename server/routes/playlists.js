@@ -46,7 +46,7 @@ async function handlePlaylist(req, res) {
     return res.render('playlists/leaf', Object.assign({}, playlistPageData, {
       template: stringTemplate,
       content: html,
-      byline: byline,
+      byline,
       createdBy,
       sections,
       title: meta.prettyName
@@ -142,7 +142,7 @@ function prepareContextualData(playlistMeta, values, breadcrumb) {
       name: prettyName,
       url: `${path}/${slug}`,
       editLink: mimeType === 'text/html' ? folder.webViewLink : webViewLink,
-      resourceType: resourceType
+      resourceType
     }
   })
 

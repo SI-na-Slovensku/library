@@ -13,7 +13,7 @@ router.get('/:page', handlePage)
 router.get('/filename-listing', async (req, res) => {
   res.header('Cache-Control', 'public, must-revalidate') // override no-cache
   const filenames = await getFilenames()
-  res.json({filenames: filenames})
+  res.json({filenames})
 })
 
 module.exports = router

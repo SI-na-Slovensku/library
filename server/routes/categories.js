@@ -3,9 +3,9 @@
 const router = require('express-promise-router')()
 
 const log = require('../logger')
-const {getMeta} = require('../list')
+const {getMeta, getTree, getTagged} = require('../list')
 const {fetchDoc, cleanName} = require('../docs')
-const {getTemplates, sortDocs, stringTemplate} = require('../utils')
+const {getTemplates, sortDocs, stringTemplate, getConfig} = require('../utils')
 const {parseUrl} = require('../urlParser')
 
 router.get('*', handleCategory)
@@ -15,6 +15,14 @@ const categories = getTemplates('categories')
 
 async function handleCategory(req, res) {
   log.info(`GET ${req.path}`)
+
+  const tree = await getTree()
+  const parsedTree = parseTree(tree)
+
+  // parsedTree.forEach((node) => {
+  //   console.log(node.prettyName)
+  // })
+
   // FIXME: consider putting this in middleware and save on req
   const {meta, parent, data, root} = await parseUrl(req.path)
 
@@ -43,7 +51,8 @@ async function handleCategory(req, res) {
     editLink: meta.mimeType === 'text/html' ? meta.folder.webViewLink : meta.webViewLink,
     id,
     template: stringTemplate,
-    duplicates
+    duplicates,
+    tree: parsedTree
   })
 
   // if this is a folder, just render from the generic data
@@ -138,4 +147,36 @@ function createRelatedList(slugs, self, baseUrl) {
     })
     .filter(({tags}) => !tags.includes('hidden'))
     .sort(sortDocs)
+}
+
+function parseTree(tree) {
+  const keys = Object.keys(tree.children)
+  return keys.map((key) => {
+    const child = tree.children[key]
+    const meta = getMeta(child.id)
+    const {sort, prettyName, webViewLink, path: url, resourceType, tags} = meta
+    return {
+      sort,
+      name: prettyName,
+      editLink: webViewLink,
+      resourceType,
+      url,
+      tags,
+      children: child.children ? parseTree(child).sort(sortDocs) : []
+    }
+  }).sort(sortDocs)
+
+  // return Object.keys(tree.children).map((key) => {
+  //   const child = tree.children[key]
+  //   const {sort, prettyName, webViewLink, path: url, resourceType, tags} = getMeta(child.id)
+  //   return {
+  //     sort,
+  //     name: prettyName,
+  //     editLink: webViewLink,
+  //     resourceType,
+  //     url,
+  //     tags,
+  //     children: parseTree(child)
+  //   }
+  // })
 }

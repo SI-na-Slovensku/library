@@ -21,6 +21,7 @@
     "chai": "^4.2.0",
     "cheerio": "^1.0.0-rc.3",
     "deepmerge": "^4.2.2",
+    "dotenv": "^8.2.0",
     "ejs": "^3.1.7",
     "express": "^4.17.3",
     "express-promise-router": "^4.0.1",
@@ -42,8 +43,7 @@
     "slugify": "^1.4.5",
     "unescape": "^1.0.1",
     "winston": "^2.4.5",
-    "xlsx": "^0.17.0",
-    "dotenv": "^8.2.0"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
@@ -51,6 +51,7 @@
     "eslint": "^8.34.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
