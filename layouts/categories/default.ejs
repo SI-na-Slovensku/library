@@ -1,38 +1,33 @@
 <!DOCTYPE html>
 <html>
-<%- include('partials/head') %>
-<body>
-<%- include('partials/header') %>
-<div class="g-body">
-  <div class="g-left-panel-my">
-    <!--    <% if (locals.siblings && siblings.length) { %>-->
-    <!--    <%- include('partials/siblingList', {kicker: template('folder.siblingList.heading')}) %>-->
-    <!--    <% } %>-->
-    <!--    <% if (locals.children && children.length) { %>-->
-    <!--      <%- include('partials/childrenList', {children, kicker: template('folder.childrenList.kicker', title)}) %>-->
-    <!--    <% } %>-->
-    <% if (locals.tree) { %>
-      <%- include('partials/tree', {tree}) %>
-    <% } %>
-  </div>
-
-
-  <div class="g-main-content">
+  <%- include('partials/head') %>
+  <body>
+    <h1 class="visually-hidden">Default template</h1>
+    <%- include('partials/header') %>
     <%- include('partials/nav') %>
-    <% if (locals.content) { %>
-      <%- content %>
-    <% } %>
-    <%- include('partials/footer', { pageType: 'document', topLevelFolder: url.split('/')[1] }) %>
-  </div>
+    <div class="g-body">
+      <div class="g-left-panel">
+        <% if (locals.sections && locals.sections.length) { %>
+          <!-- is this TOC -->
+          <%- include('partials/sectionList') %>
+        <% } %>
+        <!-- Hide sibling docs on normal pages -->
+        <!-- <% if (locals.siblings && siblings.length) { %>
+        <%- include('partials/siblingList', {kicker: template('folder.siblingList.heading')}) %>
+        <% } %> -->
+      </div>
 
-    <div class="g-right-panel-my">
-<!--        <% if (locals.sections && locals.sections.length) { %>-->
-<!--            &lt;!&ndash; is this TOC &ndash;&gt;-->
-<!--            <%- include('partials/sectionList') %>-->
-<!--        <% } %>-->
+      <div class="g-main-content">
+        <% if (locals.content) { %>
+        <%- content %>
+        <% } %>
+
+        <% if (locals.children && children.length) { %>
+        <%- include('partials/childrenList', {children, kicker: template('folder.childrenList.kicker', title)}) %>
+        <% } %>
+      </div>
+      <%- include('partials/imgModal') %>
+      <%- include('partials/footer', { pageType: 'document', topLevelFolder: url.split('/')[1] }) %>
     </div>
-
-  <%- include('partials/imgModal') %>
-</div>
-</body>
+  </body>
 </html>
