@@ -131,7 +131,7 @@ For more detailed instructions, consult the Getting Started section of the demo 
 ### Using Heroku
 
 This button can quickly deploy to Heroku:
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://nyti.ms/2CrT2y2)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 Set your app's `GOOGLE_APPLICATION_JSON`, `GOOGLE_CLIENT_ID`, and `GOOGLE_CLIENT_SECRET` with values from the service account and Oauth client. Add *<your-heroku-app-url\>.com* as an authorized domain in the general OAuth consent screen setup and then add *http://<your-heroku-app-url\>.com/auth/redirect* as the callback url in the OAuth credential setup itself.
 
